@@ -75,7 +75,7 @@ box(410, 90, 330, 70, BLUE, ["Wikimedia EventStreams", "/v2/stream/recentchange 
 # ---------- GitHub Actions container ----------
 out.append('<rect x="40" y="215" width="720" height="495" fill="#fff" stroke="#e53935" stroke-width="1.5"/>')
 out.append('<rect x="40" y="215" width="720" height="32" fill="#f44336"/>')
-text(400, 237, "GitHub Actions  (scheduled jobs · free for public repos)", 16, "bold", color="#fff")
+text(400, 237, "GitHub Actions  (scheduled jobs)", 16, "bold", color="#fff")
 
 text(225, 275, "daily.yml  ·  cron daily 06:00 UTC", 14, "bold", color="#c62828")
 text(575, 275, "pipeline.yml  ·  cron every 15 min", 14, "bold", color="#c62828")
@@ -96,7 +96,7 @@ box(410, 625, 330, 60, WHITE_RED, ["db.py publish + enrich.py", "upsert gold · 
 box(840, 205, 520, 52, PINK, ["Checkpoint State Store", "Postgres pipeline_state (Last-Event-ID) · saved with gold"])
 out.append('<rect x="820" y="275" width="560" height="240" rx="10" fill="#fafafa" '
            'stroke="#999" stroke-width="1.2" stroke-dasharray="7,5"/>')
-text(836, 296, "Supabase Storage  ·  bucket \"lake\" via Storage API (free 1 GB)", 14, "bold", anchor="start", color="#555")
+text(836, 296, "Supabase Storage  ·  bucket \"lake\" via Storage API", 14, "bold", anchor="start", color="#555")
 
 cylinder(840, 310, 520, 85, BRONZE, ["Bronze Layer", "lake/bronze/date=…/  ·  raw events, Parquet  ·  3 days"])
 cylinder(840, 410, 520, 92, SILVER, ["Silver Layer", "lake/silver/  +  lake/quarantine/  ·  clean, typed  ·  14 days"])

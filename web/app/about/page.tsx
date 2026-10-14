@@ -27,7 +27,7 @@ const STEPS = [
   },
   {
     title: "Daily batch",
-    body: "Once a day the pipeline loads the most-read articles from the Pageviews API, builds the daily digest and expires old data so everything fits in free-tier storage.",
+    body: "Once a day the pipeline loads the most-read articles from the Pageviews API, builds the daily digest and expires old data so storage stays small.",
   },
 ];
 
@@ -36,7 +36,7 @@ export default function AboutPage() {
     <>
       <PageHeader
         title="How WikiPulse works"
-        intro="A small data lakehouse that runs on free tiers: scheduled jobs, object storage for the raw and cleaned layers, and Postgres for the tables this site reads."
+        intro="A small data lakehouse: scheduled jobs, object storage for the raw and cleaned layers, and Postgres for the tables this site reads."
       />
       <Section title="Pipeline">
         <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

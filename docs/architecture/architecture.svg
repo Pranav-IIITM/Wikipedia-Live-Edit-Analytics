@@ -8,7 +8,7 @@
 <text x="575.0" y="139.4" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="middle" fill="#000">/v2/stream/recentchange (SSE)</text>
 <rect x="40" y="215" width="720" height="495" fill="#fff" stroke="#e53935" stroke-width="1.5"/>
 <rect x="40" y="215" width="720" height="32" fill="#f44336"/>
-<text x="400" y="237" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#fff">GitHub Actions  (scheduled jobs · free for public repos)</text>
+<text x="400" y="237" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#fff">GitHub Actions  (scheduled jobs)</text>
 <text x="225" y="275" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#c62828">daily.yml  ·  cron daily 06:00 UTC</text>
 <text x="575" y="275" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#c62828">pipeline.yml  ·  cron every 15 min</text>
 <rect x="60" y="305" width="330" height="60" rx="8" fill="#ffffff" stroke="#e53935" stroke-width="1.5"/>
@@ -39,7 +39,7 @@
 <text x="1100.0" y="226.4" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">Checkpoint State Store</text>
 <text x="1100.0" y="245.4" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="middle" fill="#000">Postgres pipeline_state (Last-Event-ID) · saved with gold</text>
 <rect x="820" y="275" width="560" height="240" rx="10" fill="#fafafa" stroke="#999" stroke-width="1.2" stroke-dasharray="7,5"/>
-<text x="836" y="296" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="start" fill="#555">Supabase Storage  ·  bucket "lake" via Storage API (free 1 GB)</text>
+<text x="836" y="296" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="start" fill="#555">Supabase Storage  ·  bucket "lake" via Storage API</text>
 <path d="M 840,323 L 840,382 A 260.0,13 0 0 0 1360,382 L 1360,323 A 260.0,13 0 0 0 840,323 Z" fill="#f4b183" stroke="#c55a11" stroke-width="1.5"/>
 <ellipse cx="1100.0" cy="323" rx="260.0" ry="13" fill="#f4b183" stroke="#c55a11" stroke-width="1.5"/>
 <text x="1100.0" y="354.75" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#000">Bronze Layer</text>

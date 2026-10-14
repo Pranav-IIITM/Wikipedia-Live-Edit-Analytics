@@ -21,7 +21,7 @@ full news coverage exists. WikiPulse makes that signal visible.
 
 ## How it works
 
-A medallion lakehouse that runs entirely on free tiers:
+A medallion lakehouse:
 
 | Layer | Where | Contents | Kept for |
 |---|---|---|---|
@@ -44,7 +44,7 @@ A medallion lakehouse that runs entirely on free tiers:
 6. `enrich.py` fetches descriptions and thumbnails for trending articles.
 
 **Daily** (`.github/workflows/daily.yml`): most-read articles from the Pageviews API, the daily
-digest, summaries, and retention cleanup to stay inside free-tier limits.
+digest, summaries, and retention cleanup that keeps storage bounded.
 
 **Trending and breaking.** Articles are ranked by the number of distinct human editors in the
 last 15–30 minutes. An article is *breaking* when it has 8 or more human edits from 3 or more
@@ -127,15 +127,6 @@ npm run dev
 
 On Vercel, import the repository with **Root Directory** set to `web` and add the same two
 environment variables.
-
-## Free-tier budget
-
-| Service | Limit | Expected use |
-|---|---|---|
-| GitHub Actions | free for public repositories | ~100 short runs per day |
-| Supabase Storage | 1 GB | well under 1 GB with 3/14-day retention |
-| Supabase Postgres | 500 MB | 15-minute article buckets kept 3 days, small daily tables |
-| Vercel Hobby | personal projects | static pages refreshed every 5 minutes |
 
 ## Data and licensing
 

@@ -19,3 +19,9 @@ Thumbs.db
 .vscode/
 .idea/
 .claude/
+
+# Vercel CLI link
+.vercel/
+
+.vercel
+.env*

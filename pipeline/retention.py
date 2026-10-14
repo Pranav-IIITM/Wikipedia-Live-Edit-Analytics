@@ -1,4 +1,4 @@
-"""Keeps storage inside free-tier limits: expires old lake files and old database rows."""
+"""Keeps storage bounded: expires old lake files and old database rows."""
 
 import logging
 from datetime import date, timedelta

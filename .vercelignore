@@ -1,0 +1,9 @@
+.venv
+data
+streaming_local/data
+web/node_modules
+web/.next
+supabase/.temp
+.env
+.env.*
+!.env.example
