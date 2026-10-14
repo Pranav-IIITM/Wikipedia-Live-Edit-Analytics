@@ -3,6 +3,8 @@
 Any S3-compatible service (AWS S3, Cloudflare R2, MinIO) works by changing the LAKE_S3_* settings.
 """
 
+from __future__ import annotations  # `list[str]` below must not resolve to the `list` methods
+
 import shutil
 from datetime import datetime, timezone
 from pathlib import Path
