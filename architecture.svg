@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1120" viewBox="0 0 1400 1120"><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker><marker id="arrow-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M10,0 L0,5 L10,10 z" fill="#333"/></marker></defs><rect width="1400" height="1120" fill="#ffffff"/>
+<text x="700.0" y="48" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#000">WIKIPULSE  —  OVERALL ARCHITECTURE</text>
+<rect x="60" y="90" width="330" height="70" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="225.0" y="120.4" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">Wikipedia REST APIs</text>
+<text x="225.0" y="139.4" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="middle" fill="#000">Pageviews (top-read) · Page Summary</text>
+<rect x="410" y="90" width="330" height="70" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="575.0" y="120.4" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">Wikimedia EventStreams</text>
+<text x="575.0" y="139.4" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="middle" fill="#000">/v2/stream/recentchange (SSE)</text>
+<rect x="40" y="215" width="720" height="495" fill="#fff" stroke="#e53935" stroke-width="1.5"/>
+<rect x="40" y="215" width="720" height="32" fill="#f44336"/>
+<text x="400" y="237" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#fff">GitHub Actions  (scheduled jobs · free for public repos)</text>
+<text x="225" y="275" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#c62828">daily.yml  ·  cron daily 01:00 UTC</text>
+<text x="575" y="275" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#c62828">pipeline.yml  ·  cron every 15 min</text>
+<rect x="60" y="305" width="330" height="60" rx="8" fill="#ffffff" stroke="#e53935" stroke-width="1.5"/>
+<text x="225.0" y="330.4" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">daily_batch.py</text>
+<text x="225.0" y="349.4" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="middle" fill="#000">top-read pageviews · daily digest</text>
+<rect x="60" y="385" width="330" height="60" rx="8" fill="#ffffff" stroke="#e53935" stroke-width="1.5"/>
+<text x="225.0" y="410.4" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">enrich.py</text>
+<text x="225.0" y="429.4" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="middle" fill="#000">thumbnails + extracts (trending only)</text>
+<rect x="60" y="465" width="330" height="60" rx="8" fill="#ffffff" stroke="#e53935" stroke-width="1.5"/>
+<text x="225.0" y="490.4" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">retention.py</text>
+<text x="225.0" y="509.4" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="middle" fill="#000">expire bronze/silver · hourly rollups</text>
+<rect x="410" y="305" width="330" height="60" rx="8" fill="#ffffff" stroke="#e53935" stroke-width="1.5"/>
+<text x="575.0" y="330.4" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">collect.py</text>
+<text x="575.0" y="349.4" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="middle" fill="#000">resume stream · filter articles + wikis</text>
+<rect x="410" y="385" width="330" height="60" rx="8" fill="#ffffff" stroke="#e53935" stroke-width="1.5"/>
+<text x="575.0" y="410.4" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">transform_silver.py  (DuckDB)</text>
+<text x="575.0" y="429.4" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="middle" fill="#000">parse · type-cast · dedupe</text>
+<rect x="410" y="465" width="330" height="60" rx="8" fill="#ffffff" stroke="#e53935" stroke-width="1.5"/>
+<text x="575.0" y="490.4" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">transform_gold.py  (DuckDB)</text>
+<text x="575.0" y="509.4" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="middle" fill="#000">trending · spike score · activity</text>
+<rect x="410" y="545" width="330" height="60" rx="8" fill="#ffffff" stroke="#e53935" stroke-width="1.5"/>
+<text x="575.0" y="570.4" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">quality.py</text>
+<text x="575.0" y="589.4" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="middle" fill="#000">freshness · duplicates · nulls → fail run</text>
+<rect x="410" y="625" width="330" height="60" rx="8" fill="#ffffff" stroke="#e53935" stroke-width="1.5"/>
+<text x="575.0" y="650.4" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">publish.py</text>
+<text x="575.0" y="669.4" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="middle" fill="#000">upsert gold tables → Supabase</text>
+<rect x="820" y="200" width="560" height="315" rx="10" fill="#fafafa" stroke="#999" stroke-width="1.2" stroke-dasharray="7,5"/>
+<text x="836" y="222" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="start" fill="#555">Cloudflare R2  ·  object storage (free 10 GB)</text>
+<rect x="840" y="237" width="520" height="56" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="1.5"/>
+<text x="1100.0" y="260.4" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">Checkpoint State Store</text>
+<text x="1100.0" y="279.4" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="middle" fill="#000">r2://wikipulse/state/checkpoint.json (Last-Event-ID)</text>
+<path d="M 840,323 L 840,382 A 260.0,13 0 0 0 1360,382 L 1360,323 A 260.0,13 0 0 0 840,323 Z" fill="#f4b183" stroke="#c55a11" stroke-width="1.5"/>
+<ellipse cx="1100.0" cy="323" rx="260.0" ry="13" fill="#f4b183" stroke="#c55a11" stroke-width="1.5"/>
+<text x="1100.0" y="354.75" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#000">Bronze Layer</text>
+<text x="1100.0" y="373.75" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="normal" text-anchor="middle" fill="#000">r2://wikipulse/bronze/  ·  raw events, Parquet  ·  7-day retention</text>
+<path d="M 840,423 L 840,489 A 260.0,13 0 0 0 1360,489 L 1360,423 A 260.0,13 0 0 0 840,423 Z" fill="#d9d9d9" stroke="#7f7f7f" stroke-width="1.5"/>
+<ellipse cx="1100.0" cy="423" rx="260.0" ry="13" fill="#d9d9d9" stroke="#7f7f7f" stroke-width="1.5"/>
+<text x="1100.0" y="458.25" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#000">Silver Layer</text>
+<text x="1100.0" y="477.25" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="normal" text-anchor="middle" fill="#000">r2://wikipulse/silver/  ·  clean, typed, deduplicated  ·  30 days</text>
+<path d="M 840,548 L 840,672 A 260.0,13 0 0 0 1360,672 L 1360,548 A 260.0,13 0 0 0 840,548 Z" fill="#fff2cc" stroke="#d6b656" stroke-width="1.5"/>
+<ellipse cx="1100.0" cy="548" rx="260.0" ry="13" fill="#fff2cc" stroke="#d6b656" stroke-width="1.5"/>
+<text x="1100.0" y="593.25" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#000">Gold Layer  (Supabase Postgres)</text>
+<text x="1100.0" y="612.25" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="normal" text-anchor="middle" fill="#000">trending_now · breaking_alerts · topic_timeline_15m</text>
+<text x="1100.0" y="631.25" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="normal" text-anchor="middle" fill="#000">wiki_activity_hourly · daily_top_read · daily_digest</text>
+<text x="1100.0" y="650.25" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="normal" text-anchor="middle" fill="#000">pipeline_runs (monitoring)</text>
+<rect x="880" y="765" width="480" height="80" rx="8" fill="#e1d5e7" stroke="#9673a6" stroke-width="1.5"/>
+<text x="1120.0" y="789.6" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000">Next.js Website on Vercel</text>
+<text x="1120.0" y="810.6" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">/   ·   /topic   ·   /india   ·   /stats   ·   /digest</text>
+<text x="1120.0" y="831.6" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">cached pages · revalidate every 5 min</text>
+<polyline points="575,160 575,213" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#arrow)"/>
+<rect x="517.2" y="178" width="115.6" height="17" fill="#fff"/>
+<text x="575" y="190" font-family="Arial, Helvetica, sans-serif" font-size="12.5" font-weight="normal" text-anchor="middle" fill="#000">live edits (SSE)</text>
+<polyline points="575,284 575,305" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="225,160 225,213" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#arrow)"/>
+<rect x="187.0" y="178" width="76.0" height="17" fill="#fff"/>
+<text x="225" y="190" font-family="Arial, Helvetica, sans-serif" font-size="12.5" font-weight="normal" text-anchor="middle" fill="#000">REST calls</text>
+<polyline points="225,284 225,305" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="225,365 225,385" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="225,445 225,465" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="575,365 575,385" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="575,445 575,465" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="575,525 575,545" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="575,605 575,625" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="740,322 795,322 795,265 840,265" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#arrow)" marker-start="url(#arrow-start)"/>
+<polyline points="740,350 840,350" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="740,415 805,415 805,458 840,458" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="740,655 840,655" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="225,525 225,730 900,730 900,682" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#arrow)"/>
+<rect x="465.9" y="722" width="188.2" height="17" fill="#fff"/>
+<text x="560" y="734" font-family="Arial, Helvetica, sans-serif" font-size="12.5" font-weight="normal" text-anchor="middle" fill="#000">daily gold tables + cleanup</text>
+<polyline points="1120,685 1120,765" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#arrow)"/>
+<rect x="1139.2" y="722" width="181.6" height="17" fill="#fff"/>
+<text x="1230" y="734" font-family="Arial, Helvetica, sans-serif" font-size="12.5" font-weight="normal" text-anchor="middle" fill="#000">read-only (anon key + RLS)</text>
+<rect x="40" y="875" width="1320" height="105" rx="10" fill="#f6fbf4" stroke="#82b366" stroke-width="1.5"/>
+<text x="56" y="898" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="start" fill="#2e7d32">DEVELOPER WORKFLOW (CI/CD)</text>
+<rect x="60" y="910" width="290" height="55" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+<text x="205.0" y="932.9" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">git push to GitHub</text>
+<text x="205.0" y="951.9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="middle" fill="#000">pipeline / web code changes</text>
+<rect x="390" y="910" width="290" height="55" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+<text x="535.0" y="932.9" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">ci.yml</text>
+<text x="535.0" y="951.9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="middle" fill="#000">pytest · lint on every push</text>
+<rect x="720" y="910" width="290" height="55" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+<text x="865.0" y="932.9" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">Scheduled jobs run code on main</text>
+<text x="865.0" y="951.9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="middle" fill="#000">pipeline.yml · daily.yml</text>
+<rect x="1050" y="910" width="290" height="55" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+<text x="1195.0" y="932.9" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">Vercel auto-deploy</text>
+<text x="1195.0" y="951.9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="middle" fill="#000">web/ → live site</text>
+<polyline points="350,937 390,937" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="680,937 720,937" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="1010,937 1050,937" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#arrow)"/>
+<rect x="40" y="1000" width="1320" height="100" rx="10" fill="#fff" stroke="#999" stroke-width="1.3" stroke-dasharray="7,5"/>
+<text x="56" y="1022" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="start" fill="#555">LOCAL LEARNING MODE  (streaming_local/)  —  same silver/gold logic, true streaming</text>
+<rect x="60" y="1033" width="290" height="55" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="205.0" y="1055.9" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">EventStreams producer</text>
+<text x="205.0" y="1074.9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="middle" fill="#000">wiki_producer.py</text>
+<rect x="390" y="1033" width="290" height="55" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="535.0" y="1055.9" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">Kafka (Docker, KRaft)</text>
+<text x="535.0" y="1074.9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="middle" fill="#000">topic: wiki_recentchange</text>
+<rect x="720" y="1033" width="290" height="55" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="865.0" y="1055.9" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">Spark Structured Streaming</text>
+<text x="865.0" y="1074.9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="middle" fill="#000">watermarks · windows · checkpoints</text>
+<rect x="1050" y="1033" width="290" height="55" rx="8" fill="#f5f5f5" stroke="#999999" stroke-width="1.5"/>
+<text x="1195.0" y="1055.9" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">Delta Lake (local)</text>
+<text x="1195.0" y="1074.9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" text-anchor="middle" fill="#000">bronze → silver → gold</text>
+<polyline points="350,1060 390,1060" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="680,1060 720,1060" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="1010,1060 1050,1060" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#arrow)"/></svg>
