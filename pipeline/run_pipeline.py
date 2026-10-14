@@ -1,4 +1,4 @@
-"""15-minute job: collect -> bronze -> silver -> gold -> quality -> lake upload -> publish -> enrich.
+"""Hourly job: collect -> bronze -> silver -> gold -> quality -> lake upload -> publish -> enrich.
 
 Run with:  python -m pipeline.run_pipeline
 """
@@ -9,7 +9,7 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
-from pipeline import config, db, enrich, transform
+from pipeline import config, db, enrich, notify, transform
 from pipeline.collect import collect
 from pipeline.lake import get_lake, object_key
 from pipeline.quality import QualityError, enforce, run_checks
@@ -80,6 +80,8 @@ def main() -> int:
 
         run["status"] = "success"
         db.log_run(conn, run)
+        if notify.revalidate_site():
+            log.info("website cache refreshed")
         return 0
     except QualityError as exc:
         log.error(str(exc))

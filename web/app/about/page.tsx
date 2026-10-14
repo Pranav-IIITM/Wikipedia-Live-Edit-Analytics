@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: "How it works" };
 const STEPS = [
   {
     title: "Collect",
-    body: "Every 15 minutes a scheduled job reconnects to the Wikimedia EventStreams feed, resuming from the exact event where the previous run stopped, and keeps article edits from English and ten Indian-language Wikipedias.",
+    body: "Every hour (or when someone presses Sync) a scheduled job reconnects to the Wikimedia EventStreams feed, resuming from the exact event where the previous run stopped, and keeps article edits from English and ten Indian-language Wikipedias.",
   },
   {
     title: "Bronze → Silver",

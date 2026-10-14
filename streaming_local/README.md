@@ -1,6 +1,6 @@
 # Local learning mode: Kafka + Spark Structured Streaming
 
-The production pipeline runs as 15-minute micro-batches on GitHub Actions. This folder runs
+The production pipeline runs as hourly micro-batches on GitHub Actions. This folder runs
 the same logic as a **continuous stream** on your machine, to learn the streaming concepts.
 
 ```
@@ -55,7 +55,7 @@ stage continues from its checkpoint in `data/_checkpoints/`.
 
 | | Production (`pipeline/`) | Local (`streaming_local/`) |
 |---|---|---|
-| Engine | DuckDB, 15-minute micro-batches | Spark Structured Streaming, 30-second triggers |
+| Engine | DuckDB, hourly micro-batches | Spark Structured Streaming, 30-second triggers |
 | Buffer and replay | EventStreams + saved `Last-Event-ID` | Kafka offsets in Spark checkpoints |
 | Storage | Parquet in Supabase Storage, gold in Postgres | Delta Lake on local disk |
 | Distinct editors | exact (editor lists merged in Postgres) | approximate (`approx_count_distinct`) |

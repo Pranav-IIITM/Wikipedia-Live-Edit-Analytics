@@ -77,8 +77,8 @@ out.append('<rect x="40" y="215" width="720" height="495" fill="#fff" stroke="#e
 out.append('<rect x="40" y="215" width="720" height="32" fill="#f44336"/>')
 text(400, 237, "GitHub Actions  (scheduled jobs)", 16, "bold", color="#fff")
 
-text(225, 275, "daily.yml  ·  cron daily 06:00 UTC", 14, "bold", color="#c62828")
-text(575, 275, "pipeline.yml  ·  cron every 15 min", 14, "bold", color="#c62828")
+text(225, 275, "daily.yml  ·  cron daily 06:17 UTC", 14, "bold", color="#c62828")
+text(575, 275, "pipeline.yml  ·  hourly + Sync button", 14, "bold", color="#c62828")
 
 # daily column
 box(60, 305, 330, 60, WHITE_RED, ["daily_batch.py", "top-read pageviews · daily digest"])
@@ -113,7 +113,7 @@ cylinder(840, 535, 520, 150, GOLD, [
 box(880, 765, 480, 80, PURPLE, [
     "Next.js Website on Vercel",
     "/  ·  /topic  ·  /india  ·  /stats  ·  /digest  ·  /about",
-    "use cache · refreshes every 5 min",
+    "Sync button · refreshed when pipeline publishes",
 ], size=16)
 
 # ---------- arrows: sources ----------

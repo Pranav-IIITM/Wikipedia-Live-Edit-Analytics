@@ -3,7 +3,7 @@ name: Daily batch
 on:
   schedule:
     # Pageview rankings for the previous day are published a few hours after midnight UTC.
-    - cron: "0 6 * * *"
+    - cron: "17 6 * * *"
   workflow_dispatch:
     inputs:
       day:
@@ -31,3 +31,5 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           LAKE_BUCKET: lake
+          SITE_REVALIDATE_URL: https://thewikipulse.vercel.app/api/revalidate
+          REVALIDATE_SECRET: ${{ secrets.REVALIDATE_SECRET }}

@@ -51,3 +51,7 @@ ALERT_RETENTION_DAYS = _int("ALERT_RETENTION_DAYS", 90)
 
 # Enrichment
 ENRICH_BATCH_SIZE = _int("ENRICH_BATCH_SIZE", 60)
+
+# Website cache refresh after publishing (web/app/api/revalidate). Skipped when unset.
+SITE_REVALIDATE_URL = os.getenv("SITE_REVALIDATE_URL")
+REVALIDATE_SECRET = os.getenv("REVALIDATE_SECRET")

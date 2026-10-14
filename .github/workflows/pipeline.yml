@@ -1,8 +1,9 @@
-name: Pipeline (every 15 min)
+name: Pipeline (hourly)
 
 on:
   schedule:
-    - cron: "*/15 * * * *"
+    # Off the top of the hour, when GitHub delays scheduled runs the most.
+    - cron: "17 * * * *"
   workflow_dispatch:
 
 # Never run two collectors at once: they would share one checkpoint.
@@ -31,3 +32,5 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           LAKE_BUCKET: lake
+          SITE_REVALIDATE_URL: https://thewikipulse.vercel.app/api/revalidate
+          REVALIDATE_SECRET: ${{ secrets.REVALIDATE_SECRET }}

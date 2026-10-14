@@ -31,7 +31,7 @@ A medallion lakehouse:
 | Silver | Supabase Storage (`lake/silver/`, `lake/quarantine/`) | Parsed, typed, deduplicated; bad rows quarantined | 14 days |
 | Gold | Supabase Postgres | Tables the website reads | see `pipeline/retention.py` |
 
-**Every 15 minutes** (`.github/workflows/pipeline.yml`):
+**Every hour** (`.github/workflows/pipeline.yml`), or on demand with the site's **Sync** button:
 
 1. `collect.py` reconnects to [Wikimedia EventStreams](https://stream.wikimedia.org/?doc) and
    **resumes from the saved `Last-Event-ID`**, so no edit is missed or read twice between runs. It
@@ -44,6 +44,7 @@ A medallion lakehouse:
 5. Parquet files go to the lake, then `db.py` merges gold rows, recomputes trending
    (`refresh_trending()` in SQL) and advances the checkpoint **in one transaction**.
 6. `enrich.py` fetches descriptions and thumbnails for trending articles.
+7. `notify.py` calls the site's `/api/revalidate` endpoint so pages show the new data immediately.
 
 **Daily** (`.github/workflows/daily.yml`): most-read articles from the Pageviews API, the daily
 digest, summaries, and retention cleanup that keeps storage bounded.
@@ -52,9 +53,13 @@ digest, summaries, and retention cleanup that keeps storage bounded.
 last 15–30 minutes. An article is *breaking* when it has 8 or more human edits from 3 or more
 editors, at 5× or more its average rate over the previous 24 hours.
 
-**Website.** Next.js 16 with Cache Components: pages are pre-rendered and refreshed in the
-background every 5 minutes, so traffic barely touches the database. It reads gold tables with the
+**Website.** Next.js 16 with Cache Components: pages are pre-rendered and refreshed when the
+pipeline publishes (or every 5 minutes as a fallback), so traffic barely touches the database. It reads gold tables with the
 publishable key; Row Level Security allows read-only access to gold tables only.
+
+**Sync button.** Starts the pipeline workflow through the GitHub API (`/api/sync`), then refreshes
+the page when the run finishes. Because anyone can press it, a run is only started when none is
+active and the data is more than 10 minutes old.
 
 ### Local learning mode: Kafka + Spark Structured Streaming
 
@@ -79,7 +84,7 @@ web/                 Next.js website
 streaming_local/     Kafka + Spark Structured Streaming learning mode (Docker)
 tests/               pytest suite (no network or database needed)
 docs/architecture/   diagram and the script that draws it
-.github/workflows/   ci.yml, pipeline.yml (every 15 min), daily.yml
+.github/workflows/   ci.yml, pipeline.yml (hourly), daily.yml
 ```
 
 ## Setup
@@ -114,7 +119,7 @@ URLs it prints.
 
 ### 3. GitHub Actions secrets
 
-`DATABASE_URL`, `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`, for example
+`DATABASE_URL`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` and `REVALIDATE_SECRET`, for example
 `gh secret set DATABASE_URL` (it prompts for the value). Scheduled workflows then run automatically.
 GitHub pauses schedules in repositories without commits for 60 days.
 
@@ -128,7 +133,11 @@ npm run dev
 ```
 
 On Vercel, import the repository with **Root Directory** set to `web` and add the same two
-environment variables.
+environment variables, plus:
+
+- `REVALIDATE_SECRET`: the same value as the GitHub secret, so the pipeline can refresh the site.
+- `GITHUB_DISPATCH_TOKEN` (optional, enables the Sync button): a fine-grained GitHub token for this
+  repository only, with **Actions: Read and write**.
 
 ## Data and licensing
 

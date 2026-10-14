@@ -1,4 +1,4 @@
-import { cacheLife } from "next/cache";
+import { cacheLife, cacheTag } from "next/cache";
 import { getSupabase } from "./supabase";
 import { INDIAN_WIKIS } from "./wikis";
 import type {
@@ -13,7 +13,8 @@ import type {
   TrendingItem,
 } from "./types";
 
-// The pipeline publishes every 15 minutes; pages refresh in the background every 5.
+// The pipeline publishes hourly (or on Sync) and then revalidates the "gold" tag;
+// the time-based refresh below is a fallback.
 const LIVE = { stale: 60, revalidate: 300, expire: 3600 };
 const DAILY = { stale: 300, revalidate: 3600, expire: 86400 };
 
@@ -92,6 +93,7 @@ export type HomeData = {
 export async function getHomeData(): Promise<HomeData | null> {
   "use cache";
   cacheLife(LIVE);
+  cacheTag("gold");
   const sb = getSupabase();
   if (!sb) return null;
 
@@ -151,6 +153,7 @@ export type TopicData = {
 export async function getTopicData(wiki: string, title: string): Promise<TopicData | null> {
   "use cache";
   cacheLife(LIVE);
+  cacheTag("gold");
   const sb = getSupabase();
   if (!sb) return null;
 
@@ -188,6 +191,7 @@ export type ActivityData = {
 export async function getActivityData(): Promise<ActivityData | null> {
   "use cache";
   cacheLife(LIVE);
+  cacheTag("gold");
   const sb = getSupabase();
   if (!sb) return null;
 
@@ -213,6 +217,7 @@ export async function getActivityData(): Promise<ActivityData | null> {
 export async function getDigestDays(): Promise<string[] | null> {
   "use cache";
   cacheLife(DAILY);
+  cacheTag("gold");
   const sb = getSupabase();
   if (!sb) return null;
   const res = await sb.from("daily_digest").select("day").eq("rank", 1).order("day", { ascending: false }).limit(500);
@@ -224,6 +229,7 @@ export type DigestData = { rows: DigestRow[]; summaries: Record<string, Summary>
 export async function getDigest(day: string): Promise<DigestData | null> {
   "use cache";
   cacheLife(DAILY);
+  cacheTag("gold");
   const sb = getSupabase();
   if (!sb) return null;
   const digest = rows<DigestRow>(

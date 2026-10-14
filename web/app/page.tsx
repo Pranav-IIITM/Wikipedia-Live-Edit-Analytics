@@ -50,7 +50,7 @@ async function HomeContent() {
       )}
 
       <Section title="Trending now">
-        {items.length ? <TrendingBoard items={items} /> : <Empty>No trending articles yet. The pipeline publishes every 15 minutes.</Empty>}
+        {items.length ? <TrendingBoard items={items} /> : <Empty>No trending articles yet. The pipeline publishes every hour.</Empty>}
       </Section>
 
       <div className="grid gap-8 md:grid-cols-2">

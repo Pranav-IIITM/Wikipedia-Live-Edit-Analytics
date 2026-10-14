@@ -7,7 +7,7 @@ import logging
 import sys
 from datetime import date, datetime, timedelta, timezone
 
-from pipeline import daily_batch, db, enrich, retention
+from pipeline import daily_batch, db, enrich, notify, retention
 from pipeline.lake import get_lake
 
 log = logging.getLogger("daily")
@@ -27,6 +27,8 @@ def main(argv: list[str]) -> int:
         log.info("lake files expired: %s", retention.expire_lake(get_lake(), started.date()))
         log.info("database rows expired: %s", retention.expire_database(conn))
         db.log_run(conn, {**run, "status": "success"})
+        if notify.revalidate_site():
+            log.info("website cache refreshed")
         return 0
     except Exception as exc:
         log.exception("daily run failed")
